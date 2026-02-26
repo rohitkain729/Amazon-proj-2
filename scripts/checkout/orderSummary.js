@@ -1,24 +1,27 @@
 import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
-import { products ,getProduct} from "../../data/products.js";
+import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 // import  formatCurrency  from "./utils/money.js";  when we export like export default formatCurrency then in that case we dont use the curley backets.
 import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import { deliveryOptions , getDeliveryOption } from "../../data/deliveryOptions.js";
+import {
+  deliveryOptions,
+  getDeliveryOption,
+} from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 // hello();
 dayjs();
-const today = dayjs();
-const deliveryDate = today.add(7, "days");
-console.log(deliveryDate);
-const formatedate = deliveryDate.format("dddd, MMMM D");
-console.log("formatedate:" + formatedate);
+// const today = dayjs();
+// const deliveryDate = today.add(7, "days");
+// console.log(deliveryDate);
+// const formatedate = deliveryDate.format("dddd, MMMM D");
+// console.log("formatedate:" + formatedate);
 
 export function renderOrderSummary() {
   let cartSummaryHTML = "";
 
   cart.forEach((cartItem) => {
-
     const productId = cartItem.productId;
 
     const matchingProduct = getProduct(productId);
@@ -83,9 +86,11 @@ export function renderOrderSummary() {
       const container = document.querySelector(
         `.js-cart-item-container-${productId}`,
       );
+
       // console.log('productId:'+productId);
       // console.log(container);
       container.remove();
+      renderPaymentSummary();
     });
   });
 
@@ -132,7 +137,7 @@ export function renderOrderSummary() {
       const { productId, deliveryOptionId } = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary();
     });
   });
 }
-
