@@ -32,9 +32,8 @@ class Product {
     return `$${formatCurrency(this.priceCents)}`;
   }
 
-   extraInfoHTML(){
-
-    return '';
+  extraInfoHTML() {
+    return "";
   }
 }
 
@@ -46,14 +45,12 @@ class Clothing extends Product {
     this.sizeChartLink = productDetails.sizeChartLink;
   }
 
-  extraInfoHTML(){
+  extraInfoHTML() {
     // super.extraInfoHTML();
     return `
     <a href="${this.sizeChartLink}" target="_blank">Size chart</a>
     `;
   }
-
-
 }
 
 const tshirt = new Clothing({
@@ -70,8 +67,38 @@ const tshirt = new Clothing({
   sizeChartLink: "images/clothing-size-chart.png",
 });
 
-console.log(tshirt);
-console.log(tshirt.getPrice());
+/*
+const date = new Date();
+console.log(date);
+
+const dd=date.toLocaleTimeString();
+const ddate=date.toLocaleDateString();
+console.log(dd);
+console.log(ddate);
+
+*/
+
+/*
+console.log(this);
+
+function logThis() {
+  console.log(this);
+}
+
+// logThis();
+
+// logThis.call('hello');
+
+const object3 = {
+  method: ()=>{
+    console.log(this);
+  }
+}
+
+object3.method();
+
+*/
+
 
 export const products = [
   {
