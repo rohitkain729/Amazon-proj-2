@@ -16,7 +16,8 @@ Promise.all([
       resolve();
     });
   }),
-]).then(() => {
+]).then((values) => {
+  console.log(values);
   renderOrderSummary();
   renderPaymentSummary();
 });
