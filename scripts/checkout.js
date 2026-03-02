@@ -6,18 +6,22 @@ import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 async function loadPage() {
-  await loadProductsFetch();
+  try {
+    // throw 'error';
+    await loadProductsFetch();
 
-  const value = await new Promise((resolve) => {
-    loadCart(() => {
-      resolve("value33");
+    const value = await new Promise((resolve, reject) => {
+      // throw 'error';
+      loadCart(() => {
+        // reject('error3');
+        resolve("value33");
+      });
     });
-  });
-
+  } catch (error) {
+    console.log("error occured.....");
+  }
   renderOrderSummary();
   renderPaymentSummary();
-
-  return "value2";
 }
 loadPage();
 
